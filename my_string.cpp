@@ -31,17 +31,16 @@ my_string::my_string(size_t iniSize) {
 }
 
 my_string::my_string(const char* temp) {
-    int a = 0;
-    const char* t = temp;
-    while(*temp++) {
-        a++;
+    //check every char after until we reach null value meaning string is ended
+    const char* end = temp;
+    while(*end++ != 0);
+    size_t newSize = end - temp - 1; 
+
+    str = new char[newSize];
+    size = newSize;
+    for(int i = 0; *temp; i++, temp++) {
+        str[i] = *temp;
     }
-    str = new char[a];
-    int b = 0;
-    for(b;*t;t++,b++) {
-        str[b] = *t; 
-    }
-    size = b;
 }
 
 const size_t my_string::getSize() {
@@ -53,17 +52,8 @@ const char* my_string::getStr() {
 }
 
 int main() {
-    my_string temp(20);
-    const char* a = temp.getStr();
-    size_t s = temp.getSize();
-    char newArr[s];
-    for(int i = 0; i < s; i++) {
-        newArr[i] = *(a+i);
-    }
-    cout << a << "\n";
-    for(int i = 0; i < s; i++) {
-        cout << newArr[i];
-    }
+    my_string s1("hey hows it do? im okay myself");
+    cout << s1.getStr() << " " << s1.getSize() << "\n";
 }
 
 
